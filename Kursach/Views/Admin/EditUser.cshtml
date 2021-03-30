@@ -52,13 +52,19 @@
             <div>
                 <label asp-for="MemberTicketId">Выберите абонемент:</label>
                 <select asp-for="MemberTicketId" asp-items="Model.MemberTickets">
-                    <option selected="selected" value="" >Выберите абонемент</option>
+                    <option selected="selected" value="">Выберите абонемент</option>
                 </select>
                 <span asp-validation-for="MemberTicketId" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="ConclusionDate" class="control-label"></label>
+                <input type="date" asp-for="ConclusionDate" class="form-control" />
+                <span asp-validation-for="ConclusionDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
+
         </form>
     </div>
 </div>

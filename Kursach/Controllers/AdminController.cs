@@ -50,6 +50,7 @@ namespace Kursach.Controllers
             editUser.Patronymic = user.Patronymic;
             editUser.RoleId = user.RoleId;
             editUser.UserId = user.UserId;
+            editUser.ConclusionDate = user.ConclusionDate;
             editUser.MemberTicketId = user.MemberTicketId;
             editUser.MemberTickets = new SelectList(memberTickets, "MemberTicketId", "Name");
             return View(editUser);
@@ -67,24 +68,32 @@ namespace Kursach.Controllers
 
             if (ModelState.IsValid)
             {
+                User userCh = await _context.Users.FirstOrDefaultAsync(u => u.Login == user.Login);
+                if (userCh == null)
+                {
+                    try
+                    {
+                        _context.Update(user);
+                        await _context.SaveChangesAsync();
+                    }
+                    catch (DbUpdateConcurrencyException)
+                    {
+                        User userCheck = await _context.Users.FirstOrDefaultAsync(u => u.UserId == user.UserId);
+                        if (userCheck == null)
 
-                try
-                {
-                    _context.Update(user);
-                    await _context.SaveChangesAsync();
+                        {
+                            return NotFound();
+                        }
+                        else
+                        {
+                            throw;
+                        }
+                    }
                 }
-                catch (DbUpdateConcurrencyException)
+                else
                 {
-                    User userCheck = await _context.Users.FirstOrDefaultAsync(u => u.UserId == user.UserId);
-                    if (userCheck == null)
-                   
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    ModelState.AddModelError("", "Некорректные логин и(или) пароль");
+                    return await EditUser(id);
                 }
             }
             return RedirectToAction(nameof(EditDB));
