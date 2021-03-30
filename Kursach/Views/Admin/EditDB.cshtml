@@ -1,0 +1,84 @@
+﻿@model Kursach.Models.Admin.EditDBModel
+@{
+    ViewData["Title"] = "Edit Data";
+}
+
+<ul class="nav nav-tabs" id="product">
+    <li class="nav-item">
+        <a class="nav-link active" data-toggle="tab" href="#description">Пользователи</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#characteristics">Фитнес-клубы</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#opinion">Отзывы</a>
+    </li>
+</ul>
+<div class="tab-content p-3">
+    <div class="tab-pane fade show active" id="description">
+        <h2 class="h4 mb-3">Изменение пользователей</h2>
+
+        <p><a <!--asp-page="Create"--> >Добавить пользователя</a></p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Логин
+                    </th>
+                    <th>
+                        Фамилия
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var person in Model.Users)
+                {
+                    <tr>
+                        <td>@person.Login</td>
+                        <td>@person.LastName</td>
+                        <td>
+                            <form method="post">
+                                <a asp-controller="Admin" asp-action="EditUser" asp-route-id="@person.UserId">Изменить</a>
+                                <button type="submit" class="btn btn-light" asp-controller="Admin" asp-action="DeleteUser" asp-route-id="@person.UserId">
+                                    Удалить
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="tab-pane fade" id="characteristics">
+        <h2 class="h4 mb-3">Характеристики товара</h2>
+        <p>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quae soluta qui labore quas repudiandae illum
+            dolore eum incidunt, quam aut perferendis autem iusto repellat ut nesciunt ullam dignissimos recusandae quo.
+        </p>
+        <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque atque incidunt modi quam laboriosam velit sit
+            corporis veritatis optio voluptatum, officia quis quas debitis, commodi nisi, reprehenderit ratione nesciunt
+            asperiores.
+        </p>
+    </div>
+    <div class="tab-pane fade" id="opinion">
+        <h2 class="h4 mb-3">Отзывы</h2>
+        <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt accusantium sapiente animi suscipit magnam ex
+            quasi nihil quas voluptas! Eius minus incidunt iure deserunt dolor praesentium. Ullam aperiam optio omnis!
+        </p>
+        <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem, cupiditate! Aspernatur accusamus dolores
+            tenetur iure rerum ut quibusdam nisi aliquam facilis impedit. Sed amet nemo, veniam in placeat eveniet illo!
+        </p>
+    </div>
+</div>
+
+<script>
+    // #product a – селектор, выбирающий элементы a, представляющие собой вкладки (при клике на которые нужно отображать соответствующий блок)
+    $('button[data-to]').click(function () {
+        var selector = '#product li:nth-child(' + $(this).attr('data-to') + ') a';
+        $(selector).tab('show');
+    });
+</script>
