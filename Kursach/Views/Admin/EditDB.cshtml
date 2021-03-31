@@ -5,17 +5,23 @@
 
 <ul class="nav nav-tabs" id="product">
     <li class="nav-item">
-        <a class="nav-link active" data-toggle="tab" href="#description">Пользователи</a>
+        <a class="nav-link active" data-toggle="tab" href="#users">Пользователи</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" data-toggle="tab" href="#characteristics">Фитнес-клубы</a>
+        <a class="nav-link" data-toggle="tab" href="#gums">Фитнес-клубы</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" data-toggle="tab" href="#opinion">Отзывы</a>
+        <a class="nav-link" data-toggle="tab" href="#memberTickets">Абонементы</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#trainings">Тренировка</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#trainingRegistrations">Регистрация на тренировку</a>
     </li>
 </ul>
 <div class="tab-content p-3">
-    <div class="tab-pane fade show active" id="description">
+    <div class="tab-pane fade show active" id="users">
         <h2 class="h4 mb-3">Изменение пользователей</h2>
 
         <p><a asp-controller="Admin" asp-action="AddUser">Добавить пользователя</a></p>
@@ -50,28 +56,143 @@
             </tbody>
         </table>
     </div>
-    <div class="tab-pane fade" id="characteristics">
-        <h2 class="h4 mb-3">Характеристики товара</h2>
-        <p>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quae soluta qui labore quas repudiandae illum
-            dolore eum incidunt, quam aut perferendis autem iusto repellat ut nesciunt ullam dignissimos recusandae quo.
-        </p>
-        <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque atque incidunt modi quam laboriosam velit sit
-            corporis veritatis optio voluptatum, officia quis quas debitis, commodi nisi, reprehenderit ratione nesciunt
-            asperiores.
-        </p>
+    <div class="tab-pane fade" id="gums">
+        <h2 class="h4 mb-3">Изменение фитнес-клубов</h2>
+
+        <p><a asp-controller="Admin" asp-action="AddGym">Добавить фитнес-клуб</a></p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Название
+                    </th>
+                    <th>
+                        Адрес
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var gym in Model.Gyms)
+                {
+                    <tr>
+                        <td>@gym.Name</td>
+                        <td>@gym.Address</td>
+                        <td>
+                            <form method="post">
+                                <a asp-controller="Admin" asp-action="EditGym" asp-route-id="@gym.GymId">Изменить</a>
+                                <button type="submit" class="btn btn-light" asp-controller="Admin" asp-action="DeleteGym" asp-route-id="@gym.GymId">
+                                    Удалить
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     </div>
-    <div class="tab-pane fade" id="opinion">
-        <h2 class="h4 mb-3">Отзывы</h2>
-        <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt accusantium sapiente animi suscipit magnam ex
-            quasi nihil quas voluptas! Eius minus incidunt iure deserunt dolor praesentium. Ullam aperiam optio omnis!
-        </p>
-        <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem, cupiditate! Aspernatur accusamus dolores
-            tenetur iure rerum ut quibusdam nisi aliquam facilis impedit. Sed amet nemo, veniam in placeat eveniet illo!
-        </p>
+    <div class="tab-pane fade" id="memberTickets">
+        <h2 class="h4 mb-3">Изменение абонементов</h2>
+        <p><a asp-controller="Admin" asp-action="AddMemberTicket">Добавить абонемент</a></p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Название
+                    </th>
+                    <th>
+                        Стоимость
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var ticket in Model.MemberTickets)
+                {
+                    <tr>
+                        <td>@ticket.Name</td>
+                        <td>@ticket.Cost</td>
+                        <td>
+                            <form method="post">
+                                <a asp-controller="Admin" asp-action="EditMemberTicket" asp-route-id="@ticket.MemberTicketId">Изменить</a>
+                                <button type="submit" class="btn btn-light" asp-controller="Admin" asp-action="DeleteMemberTicket" asp-route-id="@ticket.MemberTicketId">
+                                    Удалить
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="tab-pane fade" id="trainings">
+        <h2 class="h4 mb-3">Изменение тренировок</h2>
+
+        <p><a asp-controller="Admin" asp-action="AddTraining">Добавить тренировку</a></p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Название
+                    </th>
+                    <th>
+                        Время начала
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var training in Model.Trainings)
+                {
+                    <tr>
+                        <td>@training.Name</td>
+                        <td>@training.TimeOfStarting</td>
+                        <td>
+                            <form method="post">
+                                <a asp-controller="Admin" asp-action="EditTraining" asp-route-id="@training.TrainingId">Изменить</a>
+                                <button type="submit" class="btn btn-light" asp-controller="Admin" asp-action="DeleteTraining" asp-route-id="@training.TrainingId">
+                                    Удалить
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="tab-pane fade" id="trainingRegistrations">
+        <h2 class="h4 mb-3">Изменение регистрации</h2>
+        <p><a asp-controller="Admin" asp-action="AddTrainingRegistration">Добавить регистрацию на тренировку</a></p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Клиента
+                    </th>
+                    <th>
+                        Тренировка
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var trainingRegistration in Model.TrainingRegistrations)
+                {
+                    <tr>
+                        <td>@trainingRegistration.Client.Login</td>
+                        <td>@trainingRegistration.Training.Name</td>
+                        <td>
+                            <form method="post">
+                                
+                                <button type="submit" class="btn btn-light" asp-controller="Admin" asp-action="DeleteTrainingRegistration" asp-route-ClientId="@trainingRegistration.ClientId" asp-route-TrainingId="@trainingRegistration.TrainingId">
+                                    Удалить
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     </div>
 </div>
 

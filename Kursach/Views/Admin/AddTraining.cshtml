@@ -1,0 +1,56 @@
+﻿@model Kursach.Models.Admin.EditTraining
+
+
+<div class="container d-flex justify-content-center">
+
+    <form asp-action="AddTraining" asp-controller="Admin" asp-anti-forgery="true">
+        <h2>Регистрация</h2>
+        <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+        <div>
+            <div class="form-group">
+                <label asp-for="Name">Введите название</label><br />
+                <input class="form-control-sm" type="text" asp-for="Name" /><br>
+                <span class="badge badge-light" asp-validation-for="Name" />
+            </div>
+            <div class="form-group">
+                <label asp-for="TrainingDuration">Введите длительность</label><br />
+                <input class="form-control-sm" asp-for="TrainingDuration" /><br>
+                <span class="badge badge-light" asp-validation-for="TrainingDuration" />
+            </div>
+            <div>
+                <label asp-for="GymId">Выберите фитнес-центр:</label><br>
+                <select class="form-control " asp-for="GymId" asp-items="Model.Gyms">
+                    <option selected="selected" value="">Выберите центр</option>
+                </select><br>
+                <span asp-validation-for="GymId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TimeOfStarting" class="control-label">Дата начала:</label><br>
+                <input type="date" asp-for="TimeOfStarting" class="form-control" /><br>
+                <span asp-validation-for="TimeOfStarting" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Time" class="control-label">Время начала:</label><br>
+                <input type="time" asp-for="Time" class="form-control" /><br>
+                <span asp-validation-for="Time" class="text-danger"></span>
+            </div>
+            <div>
+                <label asp-for="CoachId">Выберите фитнес-центр:</label><br>
+                <select class="form-control " asp-for="CoachId" asp-items="Model.Coaches">
+                    <option selected="selected" value="">Выберите тренера</option>
+                </select><br>
+                <span asp-validation-for="CoachId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input class="btn btn-light" type="submit" value="Регистрация" />
+            </div>
+        </div>
+    </form>
+</div>
+
+@section scripts{
+
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}

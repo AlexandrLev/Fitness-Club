@@ -1,0 +1,45 @@
+﻿@model Kursach.Models.Admin.EditMemberTicket
+
+
+<div class="container d-flex justify-content-center">
+
+    <form asp-action="AddMemberTicket" asp-controller="Admin" asp-anti-forgery="true">
+        <h2>Регистрация</h2>
+        <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+        <div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cost" class="control-label"></label>
+                <input asp-for="Cost" class="form-control" />
+                <span asp-validation-for="Cost" class="text-danger"></span>
+            </div>
+            <div>
+                <label asp-for="GymId">Выберите абонемент:</label>
+                <select class="form-control " asp-for="GymId" asp-items="Model.Gyms">
+                    <option selected="selected" value="">Выберите фитнес-клуб</option>
+                </select>
+                <span asp-validation-for="GymId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ValidityPeriod" class="control-label"></label>
+                <input asp-for="ValidityPeriod" class="form-control" />
+                <span asp-validation-for="ValidityPeriod" class="text-danger"></span>
+            </div>
+            
+
+            <div class="form-group">
+                <input class="btn btn-light" type="submit" value="Регистрация" />
+            </div>
+        </div>
+    </form>
+</div>
+
+@section scripts{
+
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}

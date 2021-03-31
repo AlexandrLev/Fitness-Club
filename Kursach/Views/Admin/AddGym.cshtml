@@ -1,0 +1,37 @@
+﻿@model Kursach.Models.Admin.EditGym
+
+
+<div class="container d-flex justify-content-center">
+
+    <form asp-action="AddGym" asp-controller="Admin" asp-anti-forgery="true">
+        <h2>Регистрация</h2>
+        <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+        <div>
+            <div class="form-group">
+                <label asp-for="Name">Введите название клуба</label><br />
+                <input class="form-control-sm" type="text" asp-for="Name" /><br>
+                <span class="badge badge-light" asp-validation-for="Name" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Address">Введите адрес</label><br />
+                <input class="form-control-sm" asp-for="Address" /><br>
+                <span class="badge badge-light" asp-validation-for="Address" />
+            </div>
+            <div class="form-group">
+                <label asp-for="PhoneNumber">Введите телефон</label><br />
+                <input class="form-control-sm" asp-for="PhoneNumber" /><br>
+                <span class="badge badge-light" asp-validation-for="PhoneNumber" />
+            </div>
+            
+            <div class="form-group">
+                <input class="btn btn-light" type="submit" value="Регистрация" />
+            </div>
+        </div>
+    </form>
+</div>
+
+@section scripts{
+
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}

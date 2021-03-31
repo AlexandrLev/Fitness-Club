@@ -1,0 +1,36 @@
+﻿@model Kursach.Models.Admin.EditTrainingRegistration
+
+
+<div class="container d-flex justify-content-center">
+
+    <form asp-action="AddTrainingRegistration" asp-controller="Admin" asp-anti-forgery="true">
+        <h2>Регистрация</h2>
+        <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+        <div>
+            <div>
+                <label asp-for="ClientId">Выберите клиента:</label><br>
+                <select class="form-control " asp-for="ClientId" asp-items="Model.Clients">
+                    <option selected="selected" value="">Выберите клиента</option>
+                </select><br>
+                <span asp-validation-for="ClientId" class="text-danger"></span>
+            </div>
+            <div>
+                <label asp-for="TrainingId">Выберите тренировку:</label><br>
+                <select class="form-control " asp-for="TrainingId" asp-items="Model.Trainings">
+                    <option selected="selected" value="">Выберите тренировку</option>
+                </select><br>
+                <span asp-validation-for="TrainingId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input class="btn btn-light" type="submit" value="Регистрация" />
+            </div>
+        </div>
+    </form>
+</div>
+
+@section scripts{
+
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}

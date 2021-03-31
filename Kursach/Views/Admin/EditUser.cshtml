@@ -15,50 +15,50 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="UserId" />
             <div class="form-group">
-                <label asp-for="Login" class="control-label"></label>
-                <input asp-for="Login" class="form-control" />
+                <label asp-for="Login" class="control-label"></label><br>
+                <input asp-for="Login" class="form-control" /><br>
                 <span asp-validation-for="Login" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Password" class="control-label"></label>
-                <input asp-for="Password" class="form-control" />
+                <label asp-for="Password" class="control-label"></label><br>
+                <input asp-for="Password" class="form-control" /><br>
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="FirstName" class="control-label"></label>
-                <input asp-for="FirstName" class="form-control" />
+                <label asp-for="FirstName" class="control-label"></label><br>
+                <input asp-for="FirstName" class="form-control" /><br>
                 <span asp-validation-for="FirstName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="LastName" class="control-label"></label>
-                <input asp-for="LastName" class="form-control" />
+                <label asp-for="LastName" class="control-label"></label><br>
+                <input asp-for="LastName" class="form-control" /><br>
                 <span asp-validation-for="LastName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Patronymic" class="control-label"></label>
-                <input asp-for="Patronymic" class="form-control" />
+                <label asp-for="Patronymic" class="control-label"></label><br>
+                <input asp-for="Patronymic" class="form-control" /><br>
                 <span asp-validation-for="Patronymic" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="PassportData" class="control-label"></label>
-                <input asp-for="PassportData" class="form-control" />
+                <label asp-for="PassportData" class="control-label"></label><br>
+                <input asp-for="PassportData" class="form-control" /><br>
                 <span asp-validation-for="PassportData" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="RoleId" class="control-label"></label>
-                <input asp-for="RoleId" class="form-control" />
+                <label asp-for="RoleId" class="control-label"></label><br>
+                <input asp-for="RoleId" class="form-control" /><br>
                 <span asp-validation-for="RoleId" class="text-danger"></span>
             </div>
             <div>
-                <label asp-for="MemberTicketId">Выберите абонемент:</label>
-                <select asp-for="MemberTicketId" asp-items="Model.MemberTickets">
+                <label asp-for="MemberTicketId">Выберите абонемент:</label><br>
+                <select class="form-control " asp-for="MemberTicketId" asp-items="Model.MemberTickets">
                     <option selected="selected" value="">Выберите абонемент</option>
-                </select>
+                </select><br>
                 <span asp-validation-for="MemberTicketId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ConclusionDate" class="control-label">Дата начала действия абонемента:</label>
-                <input type="date" asp-for="ConclusionDate" class="form-control" />
+                <label asp-for="ConclusionDate" class="control-label">Дата начала действия абонемента:</label><br>
+                <input type="date" asp-for="ConclusionDate" class="form-control" /><br>
                 <span asp-validation-for="ConclusionDate" class="text-danger"></span>
             </div>
             <div class="form-group">
