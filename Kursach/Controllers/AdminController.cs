@@ -17,6 +17,7 @@ namespace Kursach.Controllers
         {
             _context = context;
         }
+        //Main method
         public IActionResult EditDB()
         {
             EditDBModel Model = new EditDBModel();
@@ -28,6 +29,8 @@ namespace Kursach.Controllers
             return View(Model);
         }
 
+
+        //EDIT User
         public async Task<IActionResult> EditUser(int? id)
         {
             if (id == null)
@@ -55,7 +58,6 @@ namespace Kursach.Controllers
             editUser.MemberTickets = new SelectList(memberTickets, "MemberTicketId", "Name");
             return View(editUser);
         }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditUser(int id, /*[Bind("ID,Title,ReleaseDate,Genre,Price")] */ User user)
@@ -68,7 +70,7 @@ namespace Kursach.Controllers
 
             if (ModelState.IsValid)
             {
-                User userCh = await _context.Users.FirstOrDefaultAsync(u => u.Login == user.Login);
+                User userCh = await _context.Users.FirstOrDefaultAsync(u => u.Login == user.Login & u.UserId != user.UserId);
                 if (userCh == null)
                 {
                     try
@@ -99,8 +101,55 @@ namespace Kursach.Controllers
             return RedirectToAction(nameof(EditDB));
         }
 
+        //ADD User
+        [HttpGet]
+        public async Task<IActionResult> AddUser()
+        {
+            var memberTickets = _context.MemberTickets.ToList();
+            
+            var editUser = new EditUser();
+            editUser.MemberTickets = new SelectList(memberTickets, "MemberTicketId", "Name");
+            return View(editUser);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddUser(User user)
+        {
+            
+            if (ModelState.IsValid)
+            {
+                User userCh = await _context.Users.FirstOrDefaultAsync(u => u.Login == user.Login);
+                if (userCh == null)
+                {
+                    try
+                    {
+                        _context.Users.Add(user);
+                        await _context.SaveChangesAsync();
+                    }
+                    catch (DbUpdateConcurrencyException)
+                    {
+                        User userCheck = await _context.Users.FirstOrDefaultAsync(u => u.UserId == user.UserId);
+                        if (userCheck == null)
 
-        // GET: Movies/Delete/5
+                        {
+                            return NotFound();
+                        }
+                        else
+                        {
+                            throw;
+                        }
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Некорректные логин и(или) пароль");
+                    return View();
+                }
+            }
+            return RedirectToAction(nameof(EditDB));
+        }
+
+        //DELETE User
         public async Task<IActionResult> DeleteUser(int? id)
         {
             if (id == null)
@@ -118,7 +167,6 @@ namespace Kursach.Controllers
             return View(user);
         }
 
-        // POST: Movies/Delete/5
         [HttpPost, ActionName("DeleteUser")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteUserConfirmed(int id)
@@ -127,6 +175,24 @@ namespace Kursach.Controllers
             _context.Users.Remove(user);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(EditDB));
+        }
+
+
+
+
+
+        //Date Validation
+        [AcceptVerbs("Get", "Post")]
+        public IActionResult CheckDate(DateTime ConclusionDate)
+        {
+            //DateTime d1 = new DateTime(ConclusionDate.Year, ConclusionDate.Month, ConclusionDate.Day);
+            //DateTime d1 = new DateTime(2021, 4, 1);
+            DateTime d2 = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
+            //DateTime d2 = new DateTime(2021, 3, 31);
+            if (ConclusionDate <= d2)
+                return Json(true);
+            else
+                return Json(false);
         }
     }
 }

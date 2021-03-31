@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -41,6 +42,8 @@ namespace Kursach.Models.Admin
 
 
         public int? MemberTicketId { get; set; }
+
+        [Remote(action: "CheckDate", controller: "Admin", ErrorMessage = "Недопустимая дата")]
         public DateTime? ConclusionDate { get; set; }
         public SelectList? MemberTickets { get; set; }
 
