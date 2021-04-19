@@ -20,7 +20,7 @@ namespace Kursach
         public string LastName { get; set; }
         public string FirstName { get; set; }
         public string Patronymic { get; set; }
-        public int PassportData { get; set; }
+        public long PassportData { get; set; }
         public int? MemberTicketId { get; set; }
         public DateTime? ConclusionDate { get; set; }
 

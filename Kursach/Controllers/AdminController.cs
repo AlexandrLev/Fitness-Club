@@ -1,4 +1,5 @@
 ﻿using Kursach.Models.Admin;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace Kursach.Controllers
 {
+[Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
 
@@ -16,8 +18,11 @@ namespace Kursach.Controllers
         public AdminController(KursuchDBContext context)
         {
             _context = context;
+            
         }
         //Main method
+
+        
         public IActionResult EditDB()
         {
             EditDBModel Model = new EditDBModel();
@@ -327,8 +332,9 @@ namespace Kursach.Controllers
             editMemberTicket.Name = memberTicket.Name;
             editMemberTicket.Cost = memberTicket.Cost;
             editMemberTicket.ValidityPeriod = memberTicket.ValidityPeriod;
-            editMemberTicket.GymId = memberTicket.MemberTicketId;
+            editMemberTicket.GymId = memberTicket.GymId;
             editMemberTicket.Gyms = new SelectList(gyms, "GymId", "Name");
+            
             return View(editMemberTicket);
         }
         [HttpPost]
@@ -636,7 +642,7 @@ namespace Kursach.Controllers
 
             var editTrainingRegistration = new EditTrainingRegistration();
             editTrainingRegistration.Trainings = new SelectList(trainings, "TrainingId", "Name");
-            editTrainingRegistration.Clients = new SelectList(clients, "UserId", "LastName");
+            editTrainingRegistration.Clients = new SelectList(clients, "UserId", "Login");
             return View(editTrainingRegistration);
         }
         [HttpPost]

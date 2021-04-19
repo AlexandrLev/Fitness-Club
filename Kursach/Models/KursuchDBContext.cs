@@ -28,7 +28,7 @@ namespace Kursach
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=desktop-vqnjpeo\\sqlexpress;Database=KursuchDB;Trusted_Connection=True;");
+                optionsBuilder.UseLazyLoadingProxies().UseSqlServer("Server=desktop-vqnjpeo\\sqlexpress;Database=KursuchDB;Trusted_Connection=True;");
             }
         }
 

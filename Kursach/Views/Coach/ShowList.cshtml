@@ -1,0 +1,53 @@
+﻿@model Kursach.Models.Coach.ShowListClass
+
+<div class="container justify-content-center">
+    <h2 class="h4 mb-3">Список записанных на тренировку "@Model.Training.Name"</h2>
+
+    <p>Время : @Model.Training.TimeOfStarting.</p>
+    <p>Центр : @Model.Training.Gym.Name.</p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+
+                </th>
+                <th>
+                    Логин
+                </th>
+                <th>
+                    Имя
+                </th>
+                <th>
+                    Фамилия
+                </th>
+                <th>
+                    Отчество
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                int i = 1;
+            }
+            @foreach (var training in Model.TrainingRegistrations)
+            {
+                <tr>
+                    <td>
+                        @(
+                    i++
+                )
+                    </td>
+                    <td>@training.Client.Login</td>
+                    <td>@training.Client.FirstName</td>
+                    <td>@training.Client.LastName</td>
+                    <td>@training.Client.Patronymic</td>
+
+                </tr>
+
+            }
+        </tbody>
+    </table>
+    <p><a asp-controller="Coach" asp-action="UpcomingTraining">Назад к списку</a></p>
+</div>
+
+

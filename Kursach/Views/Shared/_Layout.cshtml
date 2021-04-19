@@ -21,12 +21,42 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="EditDB">Edit Data</a>
-                        </li>
+
+                        @if (@User.IsInRole("Coach"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Coach" asp-action="ControleTraining">Controle Training</a>
+                            </li>
+                        }
+
+                        @if (@User.IsInRole("Coach"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Coach" asp-action="UpcomingTraining">Upcoming Training</a>
+                            </li>
+                        }
+
+
+                        @if (@User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="EditDB">Edit Data</a>
+                            </li>
+                        }
+
+
+                        @if (@User.IsInRole("Client"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Client" asp-action="ControlMemberTicket">Control Member Ticket</a>
+                            </li>
+                        }
+                        @if (@User.IsInRole("Client"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Client" asp-action="MyTraining">My Trainings</a>
+                            </li>
+                        }
                     </ul>
                 </div>
 
@@ -67,7 +97,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2021 - Fitness Web - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2021 - Fitness Web 
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

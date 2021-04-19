@@ -26,11 +26,12 @@
             </div>
 
             <div>
-                <label asp-for="GymId">Выберите абонемент:</label><br>
+                <label asp-for="GymId">Выберите фитнес-центр:</label><br>
                 <select class="form-control " asp-for="GymId" asp-items="Model.Gyms">
                     <option selected="selected" value="">Выберите фитнес-клуб</option>
                 </select><br>
                 <span asp-validation-for="GymId" class="text-danger"></span>
+
             </div>
             <div class="form-group">
                 <label asp-for="ValidityPeriod" class="control-label"></label><br>

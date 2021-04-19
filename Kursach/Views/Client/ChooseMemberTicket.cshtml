@@ -1,0 +1,42 @@
+﻿@model Kursach.MemberTicket[]
+
+<div class="container justify-content-center" >
+    <h2 class="h4 mb-3">Выбор абонементом</h2>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Название абонемента
+                </th>
+                <th>
+                    Дата покупки
+                </th>
+                <th>
+                    Срок действия
+                </th>
+                <th>
+                    Название центра
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var memTicket in Model) {
+            <tr>
+                <td>@memTicket.Name </td>
+                <td>@memTicket.Cost</td>
+                <td>@memTicket.ValidityPeriod </td>
+                <td>@memTicket.Gym?.Name</td>
+                <td>
+                    <form method="post">
+                        <button type="submit" class="btn btn-light" asp-controller="Client" asp-action="ChooseMemberTicket" asp-route-id="@memTicket.MemberTicketId">
+                            Выбрать
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>

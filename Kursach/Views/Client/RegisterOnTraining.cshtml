@@ -1,0 +1,48 @@
+﻿@model Kursach.Training[]
+
+<div class="container justify-content-center">
+    <h2 class="h4 mb-3">Мои тренировки</h2>
+
+    <p><a asp-controller="Client" asp-action="ChooseMemberTicket">Записаться на тренировку</a></p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Название тренировки
+                </th>
+                <th>
+                    Название центра
+                </th>
+                <th>
+                    Логин тренера
+                </th>
+                <th>
+                    Время начала
+                </th>
+                <th>
+                    Длительность
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var training in Model)
+            {
+                <tr>
+                    <td>@training.Name </td>
+                    <td>@training.Gym?.Name</td>
+                    <td>@training.Coach.Login</td>
+                    <td>@training.TimeOfStarting </td>
+                    <td>@training.TrainingDuration </td>
+                    <td>
+                        <form method="post">
+                            <button type="submit" class="btn btn-light" asp-controller="Client" asp-action="RegisterOnTraining" asp-route-id="@training.TrainingId">
+                                Записаться
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

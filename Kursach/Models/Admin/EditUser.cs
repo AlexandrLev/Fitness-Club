@@ -38,7 +38,7 @@ namespace Kursach.Models.Admin
 
         [Required(ErrorMessage = "Не указаны паспортные данные")]
         [Range(1000000000, 9999999999, ErrorMessage = "Недопустимое значение")]
-        public int PassportData { get; set; }
+        public long PassportData { get; set; }
 
 
         public int? MemberTicketId { get; set; }

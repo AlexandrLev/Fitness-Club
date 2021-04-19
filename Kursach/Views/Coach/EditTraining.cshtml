@@ -1,12 +1,19 @@
-﻿@model Kursach.Models.Admin.EditTraining
+﻿@model Kursach.Models.Coach.ControleTraining
 
 
-<div class="container d-flex justify-content-center">
+@{
+    ViewData["Title"] = "Edit";
+}
 
-    <form asp-action="AddTraining" asp-controller="Admin" asp-anti-forgery="true">
-        <h2>Регистрация</h2>
-        <div class="text-danger" asp-validation-summary="ModelOnly"></div>
-        <div>
+<h1>Edit</h1>
+
+<h4>Тренировки</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="EditTraining">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="TrainingId" />
             <div class="form-group">
                 <label asp-for="Name">Введите название</label><br />
                 <input class="form-control-sm" type="text" asp-for="Name" /><br>
@@ -20,7 +27,7 @@
             <div>
                 <label asp-for="GymId">Выберите фитнес-центр:</label><br>
                 <select class="form-control " asp-for="GymId" asp-items="Model.Gyms">
-                    <option selected="selected" value="">Выберите центр</option>
+                    <option selected="selected" value="">Выберите абонемент</option>
                 </select><br>
                 <span asp-validation-for="GymId" class="text-danger"></span>
             </div>
@@ -34,23 +41,19 @@
                 <input type="time" asp-for="Time" class="form-control" /><br>
                 <span asp-validation-for="Time" class="text-danger"></span>
             </div>
-            <div>
-                <label asp-for="CoachId">Выберите тренера:</label><br>
-                <select class="form-control " asp-for="CoachId" asp-items="Model.Coaches">
-                    <option selected="selected" value="">Выберите тренера</option>
-                </select><br>
-                <span asp-validation-for="CoachId" class="text-danger"></span>
+            
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
             </div>
 
-            <div class="form-group">
-                <input class="btn btn-light" type="submit" value="Регистрация" />
-            </div>
-        </div>
-    </form>
+        </form>
+    </div>
 </div>
 
-@section scripts{
+<div>
+    <a asp-controller="Coach" asp-action="ControleTraining">Назад к списку</a>
+</div>
 
-    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
-    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

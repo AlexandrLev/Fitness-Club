@@ -1,0 +1,23 @@
+﻿@model Kursach.User
+
+<div class="container justify-content-center w-50 p-3">
+    <h2 class="h4 mb-3">Управление абонементом</h2>
+    
+        <p ><a asp-controller="Client" asp-action="ChooseMemberTicket">Выбрать абонемент</a></p>
+        <h4>Название абонемента</h4><br>
+        <p>@Model.MemberTicket?.Name</p><br>
+        <h4>Дата покупки</h4><br>
+        <p>@Model.ConclusionDate</p><br>
+        <h4>Срок действия</h4><br>
+        <p>@Model.MemberTicket?.ValidityPeriod</p><br>
+        <h4>Название центра</h4><br>
+        <p>@Model.MemberTicket?.Gym?.Name</p><br>
+
+        <form method="post">
+            <button type="submit" class="btn btn-light" asp-controller="Client" asp-action="DeleteMemberFromUser" asp-route-id="@Model.UserId">
+                Удалить
+            </button>
+        </form>
+
+
+    </div>

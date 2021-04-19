@@ -1,0 +1,37 @@
+﻿@model Kursach.Training[]
+
+<div class="container justify-content-center">
+    <h2 class="h4 mb-3">Контроль тренировок</h2>
+
+    <p><a asp-controller="Coach" asp-action="AddTraining">Создать тренировку</a></p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Название
+                </th>
+                <th>
+                    Время начала
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var training in Model)
+            {
+                <tr>
+                    <td>@training.Name</td>
+                    <td>@training.TimeOfStarting</td>
+                    <td>
+                        <form method="post">
+                            <a asp-controller="Coach" asp-action="EditTraining" asp-route-id="@training.TrainingId">Изменить</a>
+                            <button type="submit" class="btn btn-light" asp-controller="Coach" asp-action="DeleteTraining" asp-route-id="@training.TrainingId">
+                                Удалить
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

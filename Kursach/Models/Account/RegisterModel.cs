@@ -35,10 +35,9 @@ namespace Kursach.Models
 
         [Required(ErrorMessage = "Не указаны паспортные данные")]
         [Range(1000000000, 9999999999, ErrorMessage = "Недопустимое значение")]
-        public int PassportData { get; set; }
+        public long PassportData { get; set; }
 
         [Required(ErrorMessage = "Не указан тип аккаунта")]
         public string AccountType { get; set; }
     }
 }
-

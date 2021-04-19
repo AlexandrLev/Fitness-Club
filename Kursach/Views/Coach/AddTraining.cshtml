@@ -1,9 +1,9 @@
-﻿@model Kursach.Models.Admin.EditTraining
+﻿@model Kursach.Models.Coach.ControleTraining
 
 
 <div class="container d-flex justify-content-center">
 
-    <form asp-action="AddTraining" asp-controller="Admin" asp-anti-forgery="true">
+    <form asp-action="AddTraining" asp-controller="Coach" asp-anti-forgery="true">
         <h2>Регистрация</h2>
         <div class="text-danger" asp-validation-summary="ModelOnly"></div>
         <div>
@@ -34,13 +34,7 @@
                 <input type="time" asp-for="Time" class="form-control" /><br>
                 <span asp-validation-for="Time" class="text-danger"></span>
             </div>
-            <div>
-                <label asp-for="CoachId">Выберите тренера:</label><br>
-                <select class="form-control " asp-for="CoachId" asp-items="Model.Coaches">
-                    <option selected="selected" value="">Выберите тренера</option>
-                </select><br>
-                <span asp-validation-for="CoachId" class="text-danger"></span>
-            </div>
+            
 
             <div class="form-group">
                 <input class="btn btn-light" type="submit" value="Регистрация" />

@@ -33,17 +33,23 @@ namespace Kursach.Controllers
                 if (user == null)
                 {
                     // добавляем пользователя в бд
-                    user = new User { Login = model.Login, Password = model.Password , LastName = model.LastName, 
-                        FirstName = model.FirstName, Patronymic = model.Patronymic,PassportData=model.PassportData
+                    user = new User
+                    {
+                        Login = model.Login,
+                        Password = model.Password,
+                        LastName = model.LastName,
+                        FirstName = model.FirstName,
+                        Patronymic = model.Patronymic,
+                        PassportData = model.PassportData
                     };
-                    
-                    Role userRole = await _context.Roles.FirstOrDefaultAsync(r => r.Name ==model.AccountType);
+
+                    Role userRole = await _context.Roles.FirstOrDefaultAsync(r => r.Name == model.AccountType);
                     if (userRole != null)
                     {
                         user.Role = userRole;
                         user.RoleId = userRole.RoleId;
                     }
-                    _context.Users.Add(user); 
+                    _context.Users.Add(user);
                     await _context.SaveChangesAsync();
 
                     await Authenticate(user); // аутентификация
@@ -51,9 +57,12 @@ namespace Kursach.Controllers
                     return RedirectToAction("Index", "Home");
                 }
                 else
+                {
                     ModelState.AddModelError("", "Некорректные логин и(или) пароль");
-
+                    return View(model);
+                }
             }
+            ModelState.AddModelError("", "Не прошел валидацию");
             return View(model);
         }
         [HttpGet]
@@ -101,4 +110,3 @@ namespace Kursach.Controllers
         }
     }
 }
- 
